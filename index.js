@@ -1,0 +1,11 @@
+import{S as d,i as a}from"./assets/vendor-5ObWk2rO.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))r(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const n of t.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&r(n)}).observe(document,{childList:!0,subtree:!0});function s(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function r(e){if(e.ep)return;e.ep=!0;const t=s(e);fetch(e.href,t)}})();const c=document.querySelector(".gallery"),f=new d(".gallery a",{captions:!0,captionsData:"alt",captionDelay:250});function m(i){const o=i.map(({webformatURL:s,largeImageURL:r,tags:e,likes:t,views:n,comments:l,downloads:u})=>`
+        <a href="${r}" class="gallery-item">
+          <img src="${s}" alt="${e}" loading="lazy" />
+          <div class="info">
+            <p><b>Likes:</b> ${t}</p>
+            <p><b>Views:</b> ${n}</p>
+            <p><b>Comments:</b> ${l}</p>
+            <p><b>Downloads:</b> ${u}</p>
+          </div>
+        </a>`).join("");c.innerHTML=o,f.refresh()}function p(){c.innerHTML=""}function h(){document.querySelector(".loader").classList.remove("hidden")}function y(){document.querySelector(".loader").classList.add("hidden")}function g(i){return fetch(`https://pixabay.com/api/?key=45696629-91516db15d2f4b6ea4d0928dd&q=${i}&image_type=photo&orientation=horizontal&safesearch=true`).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).catch(r=>{iziToast.error({position:"topRight",message:`${r}`})})}const b=document.querySelector(".search-form");b.addEventListener("submit",i=>{i.preventDefault();const o=i.currentTarget.elements.query,s=o.value.trim();if(!s){a.error({message:"Please enter a search query!",position:"topRight"});return}p(),h(),g(s).then(r=>{r.hits.length===0?a.error({message:"Sorry, there are no images matching your search query. Please try again!",position:"topRight"}):m(r.hits)}).catch(r=>{a.error({title:"Error",message:r.message})}).finally(()=>{y(),o.value=""})});
+//# sourceMappingURL=index.js.map
